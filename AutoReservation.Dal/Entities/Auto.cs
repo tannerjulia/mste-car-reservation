@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AutoReservation.Dal.Entities
 {
+    // Using Data Annotations. Could also be done using the fluent API
     public class Auto
     {
         [Key] 
@@ -23,5 +24,17 @@ namespace AutoReservation.Dal.Entities
         public int? Basistarif { get; set; }
         
         public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+    }
+
+    public class StandardAuto : Auto {
+        
+    }
+    
+    public class MittelklasseAuto : Auto {
+        
+    }
+
+    public class LuxusklasseAuto : Auto {
+        
     }
 }
