@@ -15,8 +15,8 @@ namespace AutoReservation.Dal.Entities
         
         public int Tagestarif { get; set; }
         
-        [Column(TypeName = "TIMESTAMP")]
-        public DateTime RowVersion { get; set; } //TODO DateTime für Timestamp?
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
 
         public int AutoKlasse { get; set; }
         

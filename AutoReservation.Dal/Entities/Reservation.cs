@@ -19,8 +19,8 @@ namespace AutoReservation.Dal.Entities
         [Required, MaxLength(7), Column(TypeName = "DATETIME2(7)")]
         public DateTime Bis { get; set; } //TODO datetime2(7) korrekt?
 
-        [Column(TypeName = "TIMESTAMP")]
-        public DateTime RowVersion { get; set; } //TODO DateTime für Timestamp?
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
         
         [ForeignKey(nameof(AutoId))]
         public Auto Auto { get; set; }

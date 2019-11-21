@@ -19,8 +19,8 @@ namespace AutoReservation.Dal.Entities
         [Required, MaxLength(7), Column(TypeName = "DATETIME2(7)")]
         public DateTime Geburtsdatum { get; set; }
         
-        [Column(TypeName = "TIMESTAMP")]
-        public DateTime RowVersion { get; set; } //TODO DateTime für Timestamp?
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
         
         public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
