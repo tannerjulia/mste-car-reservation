@@ -1,4 +1,4 @@
-using System;
+using System;    
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,12 +6,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace AutoReservation.Dal.Entities
 {
     // Using Data Annotations. Could also be done using the fluent API
-    public class Auto
+    public abstract class Auto
     {
         [Key] 
         public int Id { get; set; }
         
-        [Required, MaxLength(20), Column(TypeName = "NVARCHAR(20)")]
+        [Required, Column(TypeName = "NVARCHAR(20)")]
         public String Marke { get; set; }
         
         public int Tagestarif { get; set; }
@@ -20,8 +20,6 @@ namespace AutoReservation.Dal.Entities
         public byte[] RowVersion { get; set; }
 
         public int AutoKlasse { get; set; }
-        
-        public int? Basistarif { get; set; }
         
         public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
@@ -35,6 +33,6 @@ namespace AutoReservation.Dal.Entities
     }
 
     public class LuxusklasseAuto : Auto {
-        
+        public int? Basistarif { get; set; }
     }
 }

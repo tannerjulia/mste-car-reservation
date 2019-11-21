@@ -9,15 +9,15 @@ namespace AutoReservation.Dal.Entities
         [Key]
         public int ReservationsNr { get; set; }
 
-        public int AutoId { get; set; } //TODO fremdschlüssel
+        public int AutoId { get; set; }
 
-        public int KundeId { get; set; } //TODO fremdschlüssel
+        public int KundeId { get; set; }
 
-        [Required, MaxLength(7), Column(TypeName = "DATETIME2(7)")]
-        public DateTime Von { get; set; } //TODO datetime2(7) korrekt?
+        [Required, Column(TypeName = "DATETIME2(0)")]
+        public DateTime Von { get; set; }
 
-        [Required, MaxLength(7), Column(TypeName = "DATETIME2(7)")]
-        public DateTime Bis { get; set; } //TODO datetime2(7) korrekt?
+        [Required, Column(TypeName = "DATETIME2(0)")]
+        public DateTime Bis { get; set; }
 
         [Timestamp]
         public byte[] RowVersion { get; set; }

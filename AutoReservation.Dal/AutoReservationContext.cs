@@ -13,6 +13,11 @@ namespace AutoReservation.Dal
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
             // TODO: Use Fluent API here if we want to, we definetly need it to ensure relationsships later
+            modelBuilder.Entity<Auto>()
+                .HasDiscriminator<int>("AutoKlasse")
+                .HasValue<LuxusklasseAuto>(0)
+                .HasValue<MittelklasseAuto>(1)
+                .HasValue<StandardAuto>(2);
         }
     }
 }

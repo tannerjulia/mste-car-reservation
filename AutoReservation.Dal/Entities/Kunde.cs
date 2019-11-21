@@ -10,13 +10,13 @@ namespace AutoReservation.Dal.Entities
         [Key]
         public int Id { get; set; }
         
-        [Required, MaxLength(20), Column(TypeName = "NVARCHAR(20)")]
+        [Required, Column(TypeName = "NVARCHAR(20)")]
         public String Nachname { get; set; }
 
-        [Required, MaxLength(20), Column(TypeName = "NVARCHAR(20)")]
+        [Required, Column(TypeName = "NVARCHAR(20)")]
         public String Vorname { get; set; }
 
-        [Required, MaxLength(7), Column(TypeName = "DATETIME2(7)")]
+        [Required, Column(TypeName = "DATETIME2(0)")]
         public DateTime Geburtsdatum { get; set; }
         
         [Timestamp]
