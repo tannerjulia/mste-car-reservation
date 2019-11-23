@@ -19,7 +19,7 @@ namespace AutoReservation.Dal.Entities
         [Timestamp]
         public byte[] RowVersion { get; set; }
 
-        public int AutoKlasse { get; set; }
+//        public int AutoKlasse { get; set; } chapter 3.2 AutoKlass not needed anymore
         
         public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
@@ -33,6 +33,6 @@ namespace AutoReservation.Dal.Entities
     }
 
     public class LuxusklasseAuto : Auto {
-        public int? Basistarif { get; set; }
+        public int Basistarif { get; set; } //mandatory for luxury class
     }
 }
