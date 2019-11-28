@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoReservation.BusinessLayer.Exceptions;
 using AutoReservation.Dal.Entities;
 using AutoReservation.TestEnvironment;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace AutoReservation.BusinessLayer.Testing
