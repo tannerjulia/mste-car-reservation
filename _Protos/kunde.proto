@@ -9,3 +9,7 @@ package AutoReservation;
 
 service KundeService {
 }
+
+message KundeDto {
+
+}

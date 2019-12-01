@@ -25,15 +25,564 @@ namespace AutoReservation.Service.Grpc {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgphdXRvLnByb3RvEg9BdXRvUmVzZXJ2YXRpb24aG2dvb2dsZS9wcm90b2J1",
-            "Zi9lbXB0eS5wcm90bzINCgtBdXRvU2VydmljZUIfqgIcQXV0b1Jlc2VydmF0",
-            "aW9uLlNlcnZpY2UuR3JwY2IGcHJvdG8z"));
+            "Zi9lbXB0eS5wcm90bxofZ29vZ2xlL3Byb3RvYnVmL3RpbWVzdGFtcC5wcm90",
+            "byIZCgtBdXRvUmVxdWVzdBIKCgJpZBgBIAEoBSIyCghBdXRvc0R0bxImCgRj",
+            "YXJzGAEgAygLMhguQXV0b1Jlc2VydmF0aW9uLkF1dG9EdG8ikQEKB0F1dG9E",
+            "dG8SCgoCaWQYASABKAUSDQoFbWFya2UYAiABKAkSEgoKdGFnZXN0YXJpZhgD",
+            "IAEoBRISCgpSb3dWZXJzaW9uGAQgASgMEi8KCkF1dG9LbGFzc2UYBSABKA4y",
+            "Gy5BdXRvUmVzZXJ2YXRpb24uQXV0b0tsYXNzZRISCgpiYXNpc3RhcmlmGAYg",
+            "ASgFKj0KCkF1dG9LbGFzc2USDwoLTHV4dXNrbGFzc2UQABIQCgxNaXR0ZWxr",
+            "bGFzc2UQARIMCghTdGFuZGFyZBACMr0CCgtBdXRvU2VydmljZRI7CgZHZXRB",
+            "bGwSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaGS5BdXRvUmVzZXJ2YXRpb24u",
+            "QXV0b3NEdG8SPQoDR2V0EhwuQXV0b1Jlc2VydmF0aW9uLkF1dG9SZXF1ZXN0",
+            "GhguQXV0b1Jlc2VydmF0aW9uLkF1dG9EdG8SOgoGSW5zZXJ0EhguQXV0b1Jl",
+            "c2VydmF0aW9uLkF1dG9EdG8aFi5nb29nbGUucHJvdG9idWYuRW1wdHkSOgoG",
+            "VXBkYXRlEhguQXV0b1Jlc2VydmF0aW9uLkF1dG9EdG8aFi5nb29nbGUucHJv",
+            "dG9idWYuRW1wdHkSOgoGRGVsZXRlEhguQXV0b1Jlc2VydmF0aW9uLkF1dG9E",
+            "dG8aFi5nb29nbGUucHJvdG9idWYuRW1wdHlCH6oCHEF1dG9SZXNlcnZhdGlv",
+            "bi5TZXJ2aWNlLkdycGNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(null, null));
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::AutoReservation.Service.Grpc.AutoKlasse), }, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::AutoReservation.Service.Grpc.AutoRequest), global::AutoReservation.Service.Grpc.AutoRequest.Parser, new[]{ "Id" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AutoReservation.Service.Grpc.AutosDto), global::AutoReservation.Service.Grpc.AutosDto.Parser, new[]{ "Cars" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AutoReservation.Service.Grpc.AutoDto), global::AutoReservation.Service.Grpc.AutoDto.Parser, new[]{ "Id", "Marke", "Tagestarif", "RowVersion", "AutoKlasse", "Basistarif" }, null, null, null)
+          }));
     }
     #endregion
 
   }
+  #region Enums
+  public enum AutoKlasse {
+    [pbr::OriginalName("Luxusklasse")] Luxusklasse = 0,
+    [pbr::OriginalName("Mittelklasse")] Mittelklasse = 1,
+    [pbr::OriginalName("Standard")] Standard = 2,
+  }
+
+  #endregion
+
+  #region Messages
+  public sealed partial class AutoRequest : pb::IMessage<AutoRequest> {
+    private static readonly pb::MessageParser<AutoRequest> _parser = new pb::MessageParser<AutoRequest>(() => new AutoRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<AutoRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::AutoReservation.Service.Grpc.AutoReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AutoRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AutoRequest(AutoRequest other) : this() {
+      id_ = other.id_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AutoRequest Clone() {
+      return new AutoRequest(this);
+    }
+
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private int id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as AutoRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(AutoRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0) hash ^= Id.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(AutoRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class AutosDto : pb::IMessage<AutosDto> {
+    private static readonly pb::MessageParser<AutosDto> _parser = new pb::MessageParser<AutosDto>(() => new AutosDto());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<AutosDto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::AutoReservation.Service.Grpc.AutoReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AutosDto() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AutosDto(AutosDto other) : this() {
+      cars_ = other.cars_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AutosDto Clone() {
+      return new AutosDto(this);
+    }
+
+    /// <summary>Field number for the "cars" field.</summary>
+    public const int CarsFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::AutoReservation.Service.Grpc.AutoDto> _repeated_cars_codec
+        = pb::FieldCodec.ForMessage(10, global::AutoReservation.Service.Grpc.AutoDto.Parser);
+    private readonly pbc::RepeatedField<global::AutoReservation.Service.Grpc.AutoDto> cars_ = new pbc::RepeatedField<global::AutoReservation.Service.Grpc.AutoDto>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::AutoReservation.Service.Grpc.AutoDto> Cars {
+      get { return cars_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as AutosDto);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(AutosDto other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!cars_.Equals(other.cars_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= cars_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      cars_.WriteTo(output, _repeated_cars_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += cars_.CalculateSize(_repeated_cars_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(AutosDto other) {
+      if (other == null) {
+        return;
+      }
+      cars_.Add(other.cars_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            cars_.AddEntriesFrom(input, _repeated_cars_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class AutoDto : pb::IMessage<AutoDto> {
+    private static readonly pb::MessageParser<AutoDto> _parser = new pb::MessageParser<AutoDto>(() => new AutoDto());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<AutoDto> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::AutoReservation.Service.Grpc.AutoReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AutoDto() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AutoDto(AutoDto other) : this() {
+      id_ = other.id_;
+      marke_ = other.marke_;
+      tagestarif_ = other.tagestarif_;
+      rowVersion_ = other.rowVersion_;
+      autoKlasse_ = other.autoKlasse_;
+      basistarif_ = other.basistarif_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AutoDto Clone() {
+      return new AutoDto(this);
+    }
+
+    /// <summary>Field number for the "id" field.</summary>
+    public const int IdFieldNumber = 1;
+    private int id_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "marke" field.</summary>
+    public const int MarkeFieldNumber = 2;
+    private string marke_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Marke {
+      get { return marke_; }
+      set {
+        marke_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "tagestarif" field.</summary>
+    public const int TagestarifFieldNumber = 3;
+    private int tagestarif_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Tagestarif {
+      get { return tagestarif_; }
+      set {
+        tagestarif_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "RowVersion" field.</summary>
+    public const int RowVersionFieldNumber = 4;
+    private pb::ByteString rowVersion_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString RowVersion {
+      get { return rowVersion_; }
+      set {
+        rowVersion_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "AutoKlasse" field.</summary>
+    public const int AutoKlasseFieldNumber = 5;
+    private global::AutoReservation.Service.Grpc.AutoKlasse autoKlasse_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::AutoReservation.Service.Grpc.AutoKlasse AutoKlasse {
+      get { return autoKlasse_; }
+      set {
+        autoKlasse_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "basistarif" field.</summary>
+    public const int BasistarifFieldNumber = 6;
+    private int basistarif_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Basistarif {
+      get { return basistarif_; }
+      set {
+        basistarif_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as AutoDto);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(AutoDto other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Id != other.Id) return false;
+      if (Marke != other.Marke) return false;
+      if (Tagestarif != other.Tagestarif) return false;
+      if (RowVersion != other.RowVersion) return false;
+      if (AutoKlasse != other.AutoKlasse) return false;
+      if (Basistarif != other.Basistarif) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Id != 0) hash ^= Id.GetHashCode();
+      if (Marke.Length != 0) hash ^= Marke.GetHashCode();
+      if (Tagestarif != 0) hash ^= Tagestarif.GetHashCode();
+      if (RowVersion.Length != 0) hash ^= RowVersion.GetHashCode();
+      if (AutoKlasse != 0) hash ^= AutoKlasse.GetHashCode();
+      if (Basistarif != 0) hash ^= Basistarif.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (Marke.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Marke);
+      }
+      if (Tagestarif != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Tagestarif);
+      }
+      if (RowVersion.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteBytes(RowVersion);
+      }
+      if (AutoKlasse != 0) {
+        output.WriteRawTag(40);
+        output.WriteEnum((int) AutoKlasse);
+      }
+      if (Basistarif != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(Basistarif);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      }
+      if (Marke.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Marke);
+      }
+      if (Tagestarif != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Tagestarif);
+      }
+      if (RowVersion.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(RowVersion);
+      }
+      if (AutoKlasse != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) AutoKlasse);
+      }
+      if (Basistarif != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Basistarif);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(AutoDto other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Id != 0) {
+        Id = other.Id;
+      }
+      if (other.Marke.Length != 0) {
+        Marke = other.Marke;
+      }
+      if (other.Tagestarif != 0) {
+        Tagestarif = other.Tagestarif;
+      }
+      if (other.RowVersion.Length != 0) {
+        RowVersion = other.RowVersion;
+      }
+      if (other.AutoKlasse != 0) {
+        AutoKlasse = other.AutoKlasse;
+      }
+      if (other.Basistarif != 0) {
+        Basistarif = other.Basistarif;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Marke = input.ReadString();
+            break;
+          }
+          case 24: {
+            Tagestarif = input.ReadInt32();
+            break;
+          }
+          case 34: {
+            RowVersion = input.ReadBytes();
+            break;
+          }
+          case 40: {
+            AutoKlasse = (global::AutoReservation.Service.Grpc.AutoKlasse) input.ReadEnum();
+            break;
+          }
+          case 48: {
+            Basistarif = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  #endregion
+
 }
 
 #endregion Designer generated code

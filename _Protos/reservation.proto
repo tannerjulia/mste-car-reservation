@@ -9,5 +9,10 @@ option csharp_namespace = "AutoReservation.Service.Grpc";
 
 package AutoReservation;
 
-service ReservationService {
+service ReservationService { 
+	//TODO weitere methode für caravailable?
+}
+
+message ReservationDto {
+
 }
