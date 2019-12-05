@@ -109,50 +109,50 @@ namespace AutoReservation.Service.Grpc
             return ConvertGenericList(entities, ConvertToDto);
         }
         #endregion
-        //#region Reservation
-        //public static Reservation ConvertToEntity(this ReservationDto dto)
-        //{
-        //    if (dto == null) { return null; }
+        #region Reservation
+        public static Reservation ConvertToEntity(this ReservationDto dto)
+        {
+            if (dto == null) { return null; }
 
-        //    Reservation reservation = new Reservation
-        //    {
-        //        ReservationsNr = dto.ReservationsNr,
-        //        Von = dto.Von.ToDateTime(),
-        //        Bis = dto.Bis.ToDateTime(),
-        //        AutoId = dto.Auto.Id,
-        //        KundeId = dto.Kunde.Id,
-        //        RowVersion = dto.RowVersion.Length == 0
-        //            ? null
-        //            : dto.RowVersion.ToByteArray()
-        //    };
+            Reservation reservation = new Reservation
+            {
+                ReservationsNr = dto.ReservationsNr,
+                Von = dto.Von.ToDateTime(),
+                Bis = dto.Bis.ToDateTime(),
+                AutoId = dto.Auto.Id,
+                KundeId = dto.Kunde.Id,
+                RowVersion = dto.RowVersion.Length == 0
+                    ? null
+                    : dto.RowVersion.ToByteArray()
+            };
 
-        //    return reservation;
-        //}
-        //public static async Task<ReservationDto> ConvertToDto(this Task<Reservation> entityTask) => (await entityTask).ConvertToDto();
-        //public static ReservationDto ConvertToDto(this Reservation entity)
-        //{
-        //    if (entity == null) { return null; }
+            return reservation;
+        }
+        public static async Task<ReservationDto> ConvertToDto(this Task<Reservation> entityTask) => (await entityTask).ConvertToDto();
+        public static ReservationDto ConvertToDto(this Reservation entity)
+        {
+            if (entity == null) { return null; }
 
-        //    return new ReservationDto
-        //    {
-        //        ReservationsNr = entity.ReservationsNr,
-        //        Von = entity.Von.ToTimestampUtcFaked(),
-        //        Bis = entity.Bis.ToTimestampUtcFaked(),
-        //        RowVersion = ByteString.CopyFrom(entity.RowVersion ?? new byte[0]),
-        //        Auto = ConvertToDto(entity.Auto),
-        //        Kunde = ConvertToDto(entity.Kunde)
-        //    };
-        //}
-        //public static List<Reservation> ConvertToEntities(this IEnumerable<ReservationDto> dtos)
-        //{
-        //    return ConvertGenericList(dtos, ConvertToEntity);
-        //}
-        //public static async Task<List<ReservationDto>> ConvertToDtos(this Task<List<Reservation>> entitiesTask) => (await entitiesTask).ConvertToDtos();
-        //public static List<ReservationDto> ConvertToDtos(this IEnumerable<Reservation> entities)
-        //{
-        //    return ConvertGenericList(entities, ConvertToDto);
-        //}
-        //#endregion
+            return new ReservationDto
+            {
+                ReservationsNr = entity.ReservationsNr,
+                Von = entity.Von.ToTimestampUtcFaked(),
+                Bis = entity.Bis.ToTimestampUtcFaked(),
+                RowVersion = ByteString.CopyFrom(entity.RowVersion ?? new byte[0]),
+                Auto = ConvertToDto(entity.Auto),
+                Kunde = ConvertToDto(entity.Kunde)
+            };
+        }
+        public static List<Reservation> ConvertToEntities(this IEnumerable<ReservationDto> dtos)
+        {
+            return ConvertGenericList(dtos, ConvertToEntity);
+        }
+        public static async Task<List<ReservationDto>> ConvertToDtos(this Task<List<Reservation>> entitiesTask) => (await entitiesTask).ConvertToDtos();
+        public static List<ReservationDto> ConvertToDtos(this IEnumerable<Reservation> entities)
+        {
+            return ConvertGenericList(entities, ConvertToDto);
+        }
+        #endregion
 
         private static List<TTarget> ConvertGenericList<TSource, TTarget>(this IEnumerable<TSource> source, Func<TSource, TTarget> converter)
         {

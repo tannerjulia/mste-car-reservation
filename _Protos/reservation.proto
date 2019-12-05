@@ -10,9 +10,44 @@ option csharp_namespace = "AutoReservation.Service.Grpc";
 package AutoReservation;
 
 service ReservationService { 
-	//TODO weitere methode für caravailable?
+	//TODO weitere methode fï¿½r caravailable?
+
+	rpc GetAll(google.protobuf.Empty) 
+	returns (ReservationenDto);
+    
+	rpc Get(ReservationRequest)
+	returns (ReservationDto);
+    
+	rpc Insert(ReservationDto)
+	returns (ReservationDto);
+		
+	rpc Update(ReservationDto)
+	returns (google.protobuf.Empty);
+
+	rpc Delete(ReservationDto)
+	returns (google.protobuf.Empty);
+
+	rpc IsCarAvailable(ReservationDto)
+	returns (AutoAvailableResponse);
 }
 
-message ReservationDto {
+message ReservationRequest {
+	int32 id = 1;
+}
 
+message AutoAvailableResponse {
+	bool available = 1;
+}
+
+message ReservationenDto {
+	repeated ReservationDto reservationen = 1;
+}
+message ReservationDto {
+    int32 ReservationsNr = 1;
+    google.protobuf.Timestamp von = 2;
+    google.protobuf.Timestamp bis = 3;
+    bytes RowVersion = 4;
+
+	KundeDto kunde = 10;
+	AutoDto auto = 11;
 }

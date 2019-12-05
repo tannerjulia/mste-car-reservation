@@ -35,12 +35,12 @@ namespace AutoReservation.Service.Grpc.Services
             return customer.ConvertToDto();
         }
 
-        public override async Task<Empty> Insert(KundeDto request, ServerCallContext context)
+        public override async Task<KundeDto> Insert(KundeDto request, ServerCallContext context)
         {
             KundeManager manager = new KundeManager();
             Kunde kunde = request.ConvertToEntity();
-            await manager.Insert(kunde);
-            return new Empty();
+            Kunde newKunde =  await manager.Insert(kunde);
+            return newKunde.ConvertToDto();
         }
 
         public override async Task<Empty> Update(KundeDto request, ServerCallContext context)

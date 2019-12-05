@@ -34,12 +34,12 @@ namespace AutoReservation.Service.Grpc.Services
             return car.ConvertToDto();
         }
 
-        public override async Task<Empty> Insert(AutoDto request, ServerCallContext context)
+        public override async Task<AutoDto> Insert(AutoDto request, ServerCallContext context)
         {
             AutoManager manager = new AutoManager();
             Auto car = request.ConvertToEntity();
-            await manager.Insert(car);
-            return new Empty();
+            Auto newcar = await manager.Insert(car);
+            return newcar.ConvertToDto();
         }
 
         public override async Task<Empty> Update(AutoDto request, ServerCallContext context)
@@ -50,7 +50,7 @@ namespace AutoReservation.Service.Grpc.Services
             {
                 await manager.Update(car);
             }
-            catch (OptimisticConcurrencyException<Auto> exception) //TODO error handling evtl. noch nicht korrekt
+            catch (OptimisticConcurrencyException<Auto> exception)
             {
                 throw new RpcException(new Status(
                     StatusCode.Aborted,

@@ -15,7 +15,7 @@ service KundeService {
 	returns (KundeDto);
     
 	rpc Insert(KundeDto)
-	returns (google.protobuf.Empty);
+	returns (KundeDto);
 		
 	rpc Update(KundeDto)
 	returns (google.protobuf.Empty);

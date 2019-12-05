@@ -15,7 +15,7 @@ service AutoService {
         returns (AutoDto);
     
 	rpc Insert(AutoDto)
-		returns (google.protobuf.Empty);
+		returns (AutoDto);
 		
 	rpc Update(AutoDto)
 		returns (google.protobuf.Empty);
@@ -27,7 +27,6 @@ service AutoService {
 message AutoRequest {
     int32 id = 1;
 }
-    
 
 message AutosDto {
     repeated AutoDto cars = 1;

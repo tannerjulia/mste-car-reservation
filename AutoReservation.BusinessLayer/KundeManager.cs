@@ -25,12 +25,13 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public async Task Insert(Kunde kunde)
+        public async Task<Kunde> Insert(Kunde kunde)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
                 context.Entry(kunde).State = EntityState.Added;
                 await context.SaveChangesAsync();
+                return kunde;
             }
         }
 

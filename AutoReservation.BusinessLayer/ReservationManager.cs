@@ -26,7 +26,7 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public async Task Insert(Reservation reservation)
+        public async Task<Reservation> Insert(Reservation reservation)
         {
             if (CheckDateRange(reservation) && await IsCarAvailable(reservation))
             {
@@ -34,8 +34,11 @@ namespace AutoReservation.BusinessLayer
                 {
                     context.Entry(reservation).State = EntityState.Added;
                     await context.SaveChangesAsync();
+                    return reservation;
                 }
             }
+
+            return null;
         }
 
         public async Task Update(Reservation reservation)
