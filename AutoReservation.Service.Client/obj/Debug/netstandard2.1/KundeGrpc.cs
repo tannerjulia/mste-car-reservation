@@ -12,6 +12,45 @@ namespace AutoReservation.Service.Grpc {
   {
     static readonly string __ServiceName = "AutoReservation.KundeService";
 
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Empty> __Marshaller_google_protobuf_Empty = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Google.Protobuf.WellKnownTypes.Empty.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::AutoReservation.Service.Grpc.KundenDto> __Marshaller_AutoReservation_KundenDto = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AutoReservation.Service.Grpc.KundenDto.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::AutoReservation.Service.Grpc.KundeRequest> __Marshaller_AutoReservation_KundeRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AutoReservation.Service.Grpc.KundeRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::AutoReservation.Service.Grpc.KundeDto> __Marshaller_AutoReservation_KundeDto = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AutoReservation.Service.Grpc.KundeDto.Parser.ParseFrom);
+
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AutoReservation.Service.Grpc.KundenDto> __Method_GetAll = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AutoReservation.Service.Grpc.KundenDto>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAll",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_AutoReservation_KundenDto);
+
+    static readonly grpc::Method<global::AutoReservation.Service.Grpc.KundeRequest, global::AutoReservation.Service.Grpc.KundeDto> __Method_Get = new grpc::Method<global::AutoReservation.Service.Grpc.KundeRequest, global::AutoReservation.Service.Grpc.KundeDto>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Get",
+        __Marshaller_AutoReservation_KundeRequest,
+        __Marshaller_AutoReservation_KundeDto);
+
+    static readonly grpc::Method<global::AutoReservation.Service.Grpc.KundeDto, global::Google.Protobuf.WellKnownTypes.Empty> __Method_Insert = new grpc::Method<global::AutoReservation.Service.Grpc.KundeDto, global::Google.Protobuf.WellKnownTypes.Empty>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Insert",
+        __Marshaller_AutoReservation_KundeDto,
+        __Marshaller_google_protobuf_Empty);
+
+    static readonly grpc::Method<global::AutoReservation.Service.Grpc.KundeDto, global::Google.Protobuf.WellKnownTypes.Empty> __Method_Update = new grpc::Method<global::AutoReservation.Service.Grpc.KundeDto, global::Google.Protobuf.WellKnownTypes.Empty>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Update",
+        __Marshaller_AutoReservation_KundeDto,
+        __Marshaller_google_protobuf_Empty);
+
+    static readonly grpc::Method<global::AutoReservation.Service.Grpc.KundeDto, global::Google.Protobuf.WellKnownTypes.Empty> __Method_Delete = new grpc::Method<global::AutoReservation.Service.Grpc.KundeDto, global::Google.Protobuf.WellKnownTypes.Empty>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Delete",
+        __Marshaller_AutoReservation_KundeDto,
+        __Marshaller_google_protobuf_Empty);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -42,6 +81,86 @@ namespace AutoReservation.Service.Grpc {
       {
       }
 
+      public virtual global::AutoReservation.Service.Grpc.KundenDto GetAll(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAll(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::AutoReservation.Service.Grpc.KundenDto GetAll(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetAll, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::AutoReservation.Service.Grpc.KundenDto> GetAllAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAllAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::AutoReservation.Service.Grpc.KundenDto> GetAllAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetAll, null, options, request);
+      }
+      public virtual global::AutoReservation.Service.Grpc.KundeDto Get(global::AutoReservation.Service.Grpc.KundeRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Get(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::AutoReservation.Service.Grpc.KundeDto Get(global::AutoReservation.Service.Grpc.KundeRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_Get, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::AutoReservation.Service.Grpc.KundeDto> GetAsync(global::AutoReservation.Service.Grpc.KundeRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::AutoReservation.Service.Grpc.KundeDto> GetAsync(global::AutoReservation.Service.Grpc.KundeRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Get, null, options, request);
+      }
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty Insert(global::AutoReservation.Service.Grpc.KundeDto request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Insert(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty Insert(global::AutoReservation.Service.Grpc.KundeDto request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_Insert, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> InsertAsync(global::AutoReservation.Service.Grpc.KundeDto request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return InsertAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> InsertAsync(global::AutoReservation.Service.Grpc.KundeDto request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Insert, null, options, request);
+      }
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty Update(global::AutoReservation.Service.Grpc.KundeDto request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Update(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty Update(global::AutoReservation.Service.Grpc.KundeDto request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_Update, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> UpdateAsync(global::AutoReservation.Service.Grpc.KundeDto request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UpdateAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> UpdateAsync(global::AutoReservation.Service.Grpc.KundeDto request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Update, null, options, request);
+      }
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty Delete(global::AutoReservation.Service.Grpc.KundeDto request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Delete(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty Delete(global::AutoReservation.Service.Grpc.KundeDto request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_Delete, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> DeleteAsync(global::AutoReservation.Service.Grpc.KundeDto request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DeleteAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> DeleteAsync(global::AutoReservation.Service.Grpc.KundeDto request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Delete, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override KundeServiceClient NewInstance(ClientBaseConfiguration configuration)
       {

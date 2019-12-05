@@ -69,46 +69,46 @@ namespace AutoReservation.Service.Grpc
             return ConvertGenericList(entities, ConvertToDto);
         }
         #endregion
-        //#region Kunde
-        //public static Kunde ConvertToEntity(this KundeDto dto)
-        //{
-        //    if (dto == null) { return null; }
+        #region Kunde
+        public static Kunde ConvertToEntity(this KundeDto dto)
+        {
+            if (dto == null) { return null; }
 
-        //    return new Kunde
-        //    {
-        //        Id = dto.Id,
-        //        Nachname = dto.Nachname,
-        //        Vorname = dto.Vorname,
-        //        Geburtsdatum = dto.Geburtsdatum.ToDateTime(),
-        //        RowVersion = dto.RowVersion.Length == 0
-        //            ? null
-        //            : dto.RowVersion.ToByteArray()
-        //    };
-        //}
-        //public static async Task<KundeDto> ConvertToDto(this Task<Kunde> entityTask) => (await entityTask).ConvertToDto();
-        //public static KundeDto ConvertToDto(this Kunde entity)
-        //{
-        //    if (entity == null) { return null; }
+            return new Kunde
+            {
+                Id = dto.Id,
+                Nachname = dto.Nachname,
+                Vorname = dto.Vorname,
+                Geburtsdatum = dto.Geburtsdatum.ToDateTime(),
+                RowVersion = dto.RowVersion.Length == 0
+                    ? null
+                    : dto.RowVersion.ToByteArray()
+            };
+        }
+        public static async Task<KundeDto> ConvertToDto(this Task<Kunde> entityTask) => (await entityTask).ConvertToDto();
+        public static KundeDto ConvertToDto(this Kunde entity)
+        {
+            if (entity == null) { return null; }
 
-        //    return new KundeDto
-        //    {
-        //        Id = entity.Id,
-        //        Nachname = entity.Nachname,
-        //        Vorname = entity.Vorname,
-        //        Geburtsdatum = entity.Geburtsdatum.ToTimestampUtcFaked(),
-        //        RowVersion = ByteString.CopyFrom(entity.RowVersion ?? new byte[0]),
-        //    };
-        //}
-        //public static List<Kunde> ConvertToEntities(this IEnumerable<KundeDto> dtos)
-        //{
-        //    return ConvertGenericList(dtos, ConvertToEntity);
-        //}
-        //public static async Task<List<KundeDto>> ConvertToDtos(this Task<List<Kunde>> entitiesTask) => (await entitiesTask).ConvertToDtos();
-        //public static List<KundeDto> ConvertToDtos(this IEnumerable<Kunde> entities)
-        //{
-        //    return ConvertGenericList(entities, ConvertToDto);
-        //}
-        //#endregion
+            return new KundeDto
+            {
+                Id = entity.Id,
+                Nachname = entity.Nachname,
+                Vorname = entity.Vorname,
+                Geburtsdatum = entity.Geburtsdatum.ToTimestampUtcFaked(),
+                RowVersion = ByteString.CopyFrom(entity.RowVersion ?? new byte[0]),
+            };
+        }
+        public static List<Kunde> ConvertToEntities(this IEnumerable<KundeDto> dtos)
+        {
+            return ConvertGenericList(dtos, ConvertToEntity);
+        }
+        public static async Task<List<KundeDto>> ConvertToDtos(this Task<List<Kunde>> entitiesTask) => (await entitiesTask).ConvertToDtos();
+        public static List<KundeDto> ConvertToDtos(this IEnumerable<Kunde> entities)
+        {
+            return ConvertGenericList(entities, ConvertToDto);
+        }
+        #endregion
         //#region Reservation
         //public static Reservation ConvertToEntity(this ReservationDto dto)
         //{

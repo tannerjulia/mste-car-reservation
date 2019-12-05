@@ -8,6 +8,9 @@
 using grpc = global::Grpc.Core;
 
 namespace AutoReservation.Service.Grpc {
+  /// <summary>
+  ///TODO weitere methode für caravailable?
+  /// </summary>
   public static partial class ReservationService
   {
     static readonly string __ServiceName = "AutoReservation.ReservationService";
