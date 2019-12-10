@@ -31,10 +31,10 @@ namespace AutoReservation.Service.Grpc.Testing
             // act
             // assert
             Assert.Equal(4,kundenDtos.Count);
-            CompareKundenDtos(kundenDtos[0], 1,"Nass", "Anna", Timestamp.FromDateTime(new DateTime(1981, 05, 05)));
-            CompareKundenDtos(kundenDtos[1], 2, "Beil", "Timo", Timestamp.FromDateTime(new DateTime(1980, 09, 09)));
-            CompareKundenDtos(kundenDtos[2], 3, "Pfahl", "Martha", Timestamp.FromDateTime(new DateTime(1990, 07, 03)));
-            CompareKundenDtos(kundenDtos[3], 4, "Zufall", "Rainer", Timestamp.FromDateTime(new DateTime(1954, 11, 11)));
+            CompareKundenDtos(kundenDtos[0], 1,"Nass", "Anna", Timestamp.FromDateTime(new DateTime(1981, 05, 05 , 0,0,0, DateTimeKind.Utc )));
+            CompareKundenDtos(kundenDtos[1], 2, "Beil", "Timo", Timestamp.FromDateTime(new DateTime(1980, 09, 09, 0,0,0, DateTimeKind.Utc)));
+            CompareKundenDtos(kundenDtos[2], 3, "Pfahl", "Martha", Timestamp.FromDateTime(new DateTime(1990, 07, 03, 0,0,0, DateTimeKind.Utc)));
+            CompareKundenDtos(kundenDtos[3], 4, "Zufall", "Rainer", Timestamp.FromDateTime(new DateTime(1954, 11, 11, 0,0,0, DateTimeKind.Utc)));
         }
         
         private void CompareKundenDtos(KundeDto kunde, int id, string nachname, string vorname, Timestamp geburtsdatum) {
@@ -56,23 +56,24 @@ namespace AutoReservation.Service.Grpc.Testing
             // act
             
             // assert
-            CompareKundenDtos(kunde1, 1, "Nass", "Anna", Timestamp.FromDateTime(new DateTime(1981, 05, 05)));
-            CompareKundenDtos(kunde2, 2, "Beil", "Timo", Timestamp.FromDateTime(new DateTime(1980, 09, 09)));
-            CompareKundenDtos(kunde3, 3, "Pfahl", "Martha", Timestamp.FromDateTime(new DateTime(1990, 07, 03)));
-            CompareKundenDtos(kunde4, 4, "Zufall", "Rainer", Timestamp.FromDateTime(new DateTime(1954, 11, 11)));
+            CompareKundenDtos(kunde1, 1, "Nass", "Anna", Timestamp.FromDateTime(new DateTime(1981, 05, 05, 0,0,0, DateTimeKind.Utc)));
+            CompareKundenDtos(kunde2, 2, "Beil", "Timo", Timestamp.FromDateTime(new DateTime(1980, 09, 09, 0,0,0, DateTimeKind.Utc)));
+            CompareKundenDtos(kunde3, 3, "Pfahl", "Martha", Timestamp.FromDateTime(new DateTime(1990, 07, 03, 0,0,0, DateTimeKind.Utc)));
+            CompareKundenDtos(kunde4, 4, "Zufall", "Rainer", Timestamp.FromDateTime(new DateTime(1954, 11, 11, 0,0,0, DateTimeKind.Utc)));
         }
 
         [Fact]
         public async Task GetKundeByIdWithIllegalIdTest()
         {
-            throw new NotImplementedException("Test not implemented.");
             // arrange
-            KundeDto kunde1 = _target.Get(new KundeRequest { Id = 5 } );
-            
+            RpcException exception = Assert.Throws<RpcException>(() => _target.Get(new KundeRequest { Id = 5 } ));
+
             // act
-            
+
             // assert
-            Assert.Null(kunde1);
+            Assert.Equal(StatusCode.OutOfRange, exception.StatusCode);
+            Assert.Equal("Status(StatusCode=OutOfRange, Detail=\"Id couldn't be found.\")", exception.Message);
+            
         }
 
         [Fact]
@@ -81,7 +82,7 @@ namespace AutoReservation.Service.Grpc.Testing
             // arrange
             string nachname = "Gabriel";
             string vorname = "Dominic";
-            Timestamp geburtsdatum = Timestamp.FromDateTime(new DateTime(1981, 05, 05));
+            Timestamp geburtsdatum = Timestamp.FromDateTime(new DateTime(1981, 05, 05, 0,0,0, DateTimeKind.Utc));
             
             KundeDto kunde = new KundeDto();
             kunde.Nachname = nachname;
@@ -99,17 +100,19 @@ namespace AutoReservation.Service.Grpc.Testing
         [Fact]
         public async Task DeleteKundeTest()
         {
+            
             // arrange
             int kundeDeleteId = 1;
-            KundeDto kunde1 = new KundeDto();
-            kunde1.Id = kundeDeleteId;
-            
+            KundeDto kunde1 = _target.Get(new KundeRequest {Id = kundeDeleteId});
+
             // act
             _target.Delete(kunde1);
-            KundeDto kundeDeleted = _target.Get(new KundeRequest { Id = kundeDeleteId } );
-            
+
             // assert
-            Assert.Null(kundeDeleted);
+            RpcException exception =
+                Assert.Throws<RpcException>(() => _target.Get(new KundeRequest() {Id = kundeDeleteId}));
+            Assert.Equal(StatusCode.OutOfRange, exception.StatusCode);
+            Assert.Equal("Status(StatusCode=OutOfRange, Detail=\"Id couldn't be found.\")", exception.Message);
         }
 
         [Fact]
@@ -119,9 +122,9 @@ namespace AutoReservation.Service.Grpc.Testing
             int kundeUpdateId = 2;
             string kundeUpdateNachname = "Muster";
             string kundeUpdateVorname = "Hans";
-            Timestamp kundeUpdateGeburtsdatum = Timestamp.FromDateTime(new DateTime(2000, 01, 01));
+            Timestamp kundeUpdateGeburtsdatum = Timestamp.FromDateTime(new DateTime(2000, 01, 01, 0,0,0, DateTimeKind.Utc));
 
-            KundeDto kundeUpdate = new KundeDto();
+            KundeDto kundeUpdate = _target.Get(new KundeRequest { Id = kundeUpdateId } );
             kundeUpdate.Id = kundeUpdateId;
             kundeUpdate.Nachname = kundeUpdateNachname;
             kundeUpdate.Vorname = kundeUpdateVorname;
@@ -142,22 +145,24 @@ namespace AutoReservation.Service.Grpc.Testing
             KundeDto kunde1 = _target.Get(new KundeRequest { Id = 2 });
             kunde1.Nachname = "Bar";
             kunde1.Vorname = "Foo";
-            kunde1.Geburtsdatum = Timestamp.FromDateTime(new DateTime(2000, 01, 01));
+            kunde1.Geburtsdatum = Timestamp.FromDateTime(new DateTime(2000, 01, 01, 0,0,0, DateTimeKind.Utc));
 
 
             KundeDto kunde2 = _target.Get(new KundeRequest {Id = 2});
             kunde2.Nachname = "Test";
             kunde2.Vorname = "Random";
-            kunde2.Geburtsdatum = Timestamp.FromDateTime(new DateTime(2001, 01, 01));
+            kunde2.Geburtsdatum = Timestamp.FromDateTime(new DateTime(2001, 01, 01, 0,0,0, DateTimeKind.Utc));
 
             //act
             _target.Update(kunde1);
             
-            Assert.Throws<OptimisticConcurrencyException<Kunde>>(() => _target.Update(kunde2));
+            RpcException exception = Assert.Throws<RpcException>(() => _target.Update(kunde2));
+            Assert.Equal(StatusCode.Aborted, exception.StatusCode);
+            Assert.Equal("Status(StatusCode=Aborted, Detail=\"Conccurency Exception.\")", exception.Message);
             KundeDto kunde = _target.Get(new KundeRequest { Id = 2 });
 
             //assert
-            CompareKundenDtos(kunde, 2, "Bar", "Foo", Timestamp.FromDateTime(new DateTime(2000, 01, 01)));
+            CompareKundenDtos(kunde, 2, "Bar", "Foo", Timestamp.FromDateTime(new DateTime(2000, 01, 01, 0,0,0, DateTimeKind.Utc)));
         }
     }
 }

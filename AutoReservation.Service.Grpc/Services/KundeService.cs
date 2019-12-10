@@ -32,6 +32,12 @@ namespace AutoReservation.Service.Grpc.Services
         {
             KundeManager manager = new KundeManager();
             Kunde customer = await manager.Get(request.Id);
+            if (customer == null)
+            {
+                throw new RpcException(new Status(
+                    StatusCode.OutOfRange, "Id couldn't be found."
+                ));
+            }
             return customer.ConvertToDto();
         }
 
