@@ -43,10 +43,27 @@ namespace AutoReservation.Service.Grpc.Services
 
         public override async Task<ReservationDto> Insert(ReservationDto request, ServerCallContext context)
         {
-            ReservationManager manager = new ReservationManager();
-            Reservation reservation = request.ConvertToEntity();
-            Reservation newreservation = await manager.Insert(reservation);
-            return newreservation.ConvertToDto();
+            try
+            {
+                ReservationManager manager = new ReservationManager();
+                Reservation reservation = request.ConvertToEntity();
+                Reservation newreservation = await manager.Insert(reservation);
+                return newreservation.ConvertToDto();
+            }
+            catch (InvalidDateRangeException exception)
+            {
+                throw new RpcException(new Status(
+                    StatusCode.FailedPrecondition,
+                    "From-To must be at least 24 hours apart"
+                ), exception.ToString());
+            }
+            catch (AutoUnavailableException exception)
+            {
+                throw new RpcException(new Status(
+                    StatusCode.FailedPrecondition,
+                    "Car is not available"
+                ), exception.ToString());
+            }
         }
 
         public override async Task<Empty> Update(ReservationDto request, ServerCallContext context)
@@ -61,14 +78,14 @@ namespace AutoReservation.Service.Grpc.Services
             {
                 throw new RpcException(new Status(
                     StatusCode.Aborted,
-                    "Conccurency Exception."
+                    "Conccurency Exception"
                 ), exception.ToString());
             }
             catch (InvalidDateRangeException exception)
             {
                 throw new RpcException(new Status(
                     StatusCode.FailedPrecondition,
-                    "From-To must be at least 24 hours apart.."
+                    "From-To must be at least 24 hours apart"
                 ), exception.ToString());
             }
             catch (AutoUnavailableException exception)

@@ -182,20 +182,22 @@ namespace AutoReservation.Service.Grpc.Testing
         public async Task UpdateReservationWithOptimisticConcurrencyTest()
         {
             // arrange
-            ReservationDto reservation1 = _target.Get(new ReservationRequest {Id = 2});
-            reservation1.Von = Timestamp.FromDateTime(new DateTime(2020, 03, 10, 0,0,0, DateTimeKind.Utc));
-            reservation1.Bis = Timestamp.FromDateTime(new DateTime(2020, 03, 15, 0,0,0, DateTimeKind.Utc));
-            
-            ReservationDto reservation2 = _target.Get(new ReservationRequest {Id = 2});
-            reservation2.Von = Timestamp.FromDateTime(new DateTime(2020, 03, 11, 0,0,0, DateTimeKind.Utc));
-            reservation2.Bis = Timestamp.FromDateTime(new DateTime(2020, 03, 14, 0,0,0, DateTimeKind.Utc));
+            ReservationDto reservation1 = _target.Get(new ReservationRequest {Id = 1});
+            reservation1.Von = Timestamp.FromDateTime(new DateTime(2020, 10, 21, 0,0,0, DateTimeKind.Utc));
+            reservation1.Bis = Timestamp.FromDateTime(new DateTime(2020, 10, 23, 0,0,0, DateTimeKind.Utc));
+
+            ReservationDto reservation2 = _target.Get(new ReservationRequest {Id = 1});
+            reservation2.Von = Timestamp.FromDateTime(new DateTime(2020, 10, 24, 0,0,0, DateTimeKind.Utc));
+            reservation2.Bis = Timestamp.FromDateTime(new DateTime(2020, 10, 26, 0,0,0, DateTimeKind.Utc));
             
             //act
             _target.Update(reservation1);
-            Assert.Throws<OptimisticConcurrencyException<Auto>>(() => _target.Update(reservation2));
-            ReservationDto reservation = _target.Get(new ReservationRequest {Id = 2});
+            RpcException exception = Assert.Throws<RpcException>(() => _target.Update(reservation2));
+            Assert.Equal(StatusCode.Aborted, exception.StatusCode);
+            Assert.Equal("Status(StatusCode=Aborted, Detail=\"Conccurency Exception\")", exception.Message);
 
             //assert
+            ReservationDto reservation = _target.Get(new ReservationRequest {Id = 2});
             CompareReservationDtos(reservation, 2,
                 Timestamp.FromDateTime(new DateTime(2020, 03, 10, 0,0,0, DateTimeKind.Utc)), 
                 Timestamp.FromDateTime(new DateTime(2020, 03, 15, 0,0,0, DateTimeKind.Utc)), 
@@ -219,7 +221,9 @@ namespace AutoReservation.Service.Grpc.Testing
             reservation.Auto = autoDto;
             
             // act - assert
-            Assert.Throws<InvalidDateRangeException>(() => _target.Insert(reservation));
+            RpcException exception = Assert.Throws<RpcException>(() => _target.Insert(reservation));
+            Assert.Equal(StatusCode.FailedPrecondition, exception.StatusCode);
+            Assert.Equal("Status(StatusCode=FailedPrecondition, Detail=\"From-To must be at least 24 hours apart\")", exception.Message);
         }
 
         [Fact]
@@ -234,21 +238,23 @@ namespace AutoReservation.Service.Grpc.Testing
             };
 
             // act - assert
-            Assert.Throws<AutoUnavailableException>(() => _target.Insert(reservation));
+            RpcException exception = Assert.Throws<RpcException>(() => _target.Insert(reservation));
+            Assert.Equal(StatusCode.FailedPrecondition, exception.StatusCode);
+            Assert.Equal("Status(StatusCode=FailedPrecondition, Detail=\"Car is not available\")", exception.Message);
         }
 
         [Fact]
         public async Task UpdateReservationWithInvalidDateRangeTest()
         {
             // arrange
-            ReservationDto reservationUpdate = new ReservationDto() {
-                ReservationsNr = 3,
-                Von = Timestamp.FromDateTime(new DateTime(2020,10,04, 12, 00, 00, DateTimeKind.Utc)),
-                Bis = Timestamp.FromDateTime(new DateTime(2020, 10, 05, 11, 59, 59, DateTimeKind.Utc))
-            };
+            ReservationDto reservationUpdate = _target.Get(new ReservationRequest {Id = 3});
+            reservationUpdate.Von = Timestamp.FromDateTime(new DateTime(2020, 10, 04, 12, 00, 00, DateTimeKind.Utc));
+            reservationUpdate.Bis = Timestamp.FromDateTime(new DateTime(2020, 10, 05, 11, 59, 59, DateTimeKind.Utc));
             
             // act - assert
-            Assert.Throws<InvalidDateRangeException>(() => _target.Update(reservationUpdate));
+            RpcException exception = Assert.Throws<RpcException>(() => _target.Update(reservationUpdate));
+            Assert.Equal(StatusCode.FailedPrecondition, exception.StatusCode);
+            Assert.Equal("Status(StatusCode=FailedPrecondition, Detail=\"From-To must be at least 24 hours apart\")", exception.Message);
         }
 
         [Fact]
@@ -264,7 +270,9 @@ namespace AutoReservation.Service.Grpc.Testing
             };
 
             // act - assert
-            Assert.Throws<AutoUnavailableException>(() => _target.Update(reservation));
+            RpcException exception = Assert.Throws<RpcException>(() => _target.Update(reservation));
+            Assert.Equal(StatusCode.FailedPrecondition, exception.StatusCode);
+            Assert.Equal("Status(StatusCode=FailedPrecondition, Detail=\"Car is not available\")", exception.Message);
         }
 
         [Fact]

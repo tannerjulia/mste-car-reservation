@@ -15,14 +15,21 @@ namespace AutoReservation.BusinessLayer
         public async Task<List<Reservation>> GetAll()
         {
             using AutoReservationContext context = new AutoReservationContext();
-            return await context.Reservationen.ToListAsync();
+            return await context.Reservationen
+                .Include(r => r.Auto) //Eager Loading
+                .Include(r => r.Kunde) //Eager Loading
+                .ToListAsync();
         }
 
         public async Task<Reservation> Get(int id)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
-                return await context.Reservationen.FindAsync(id);
+                return await context.Reservationen
+                    .Where(r => r.ReservationsNr == id)
+                    .Include(r => r.Auto) //Eager Loading
+                    .Include(r => r.Kunde) //Eager Loading
+                    .FirstAsync();
             }
         }
 
