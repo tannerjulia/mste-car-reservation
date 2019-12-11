@@ -197,12 +197,12 @@ namespace AutoReservation.Service.Grpc.Testing
             Assert.Equal("Status(StatusCode=Aborted, Detail=\"Conccurency Exception\")", exception.Message);
 
             //assert
-            ReservationDto reservation = _target.Get(new ReservationRequest {Id = 2});
-            CompareReservationDtos(reservation, 2,
-                Timestamp.FromDateTime(new DateTime(2020, 03, 10, 0,0,0, DateTimeKind.Utc)), 
-                Timestamp.FromDateTime(new DateTime(2020, 03, 15, 0,0,0, DateTimeKind.Utc)), 
+            ReservationDto reservation = _target.Get(new ReservationRequest {Id = 1});
+            CompareReservationDtos(reservation, 1,
+                Timestamp.FromDateTime(new DateTime(2020, 10, 21, 0,0,0, DateTimeKind.Utc)), 
+                Timestamp.FromDateTime(new DateTime(2020, 10, 23, 0,0,0, DateTimeKind.Utc)), 
                 _kundeClient.Get(new KundeRequest { Id = 1 } ),
-                _autoClient.Get(new AutoRequest { Id = 2 } ));
+                _autoClient.Get(new AutoRequest { Id = 1 } ));
         }
 
         [Fact]
