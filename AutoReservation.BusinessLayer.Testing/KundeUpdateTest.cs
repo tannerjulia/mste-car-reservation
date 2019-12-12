@@ -24,7 +24,7 @@ namespace AutoReservation.BusinessLayer.Testing
             Kunde kunde = await _target.Get(1);
             kunde.Nachname = "Tanner";
             kunde.Vorname = "Julia";
-            kunde.Geburtsdatum = DateTime.Parse("04/10/1996");
+            kunde.Geburtsdatum = new DateTime(1996, 10, 04);
 
             // act
             await _target.Update(kunde);
@@ -34,7 +34,7 @@ namespace AutoReservation.BusinessLayer.Testing
             Assert.Equal(1, kunde.Id);
             Assert.Equal("Tanner", kunde.Nachname);
             Assert.Equal("Julia", kunde.Vorname);
-            Assert.Equal(DateTime.Parse("04/10/1996"), kunde.Geburtsdatum);
+            Assert.Equal(new DateTime(1996, 10, 04), kunde.Geburtsdatum);
         }
 
         [Fact]
@@ -44,12 +44,12 @@ namespace AutoReservation.BusinessLayer.Testing
             Kunde kunde1 = await _target.Get(1);
             kunde1.Nachname = "Tanner";
             kunde1.Vorname = "Julia";
-            kunde1.Geburtsdatum = DateTime.Parse("04/10/1996");
+            kunde1.Geburtsdatum = new DateTime(1996, 10, 04);
 
             Kunde kunde2 = await _target.Get(1);
             kunde2.Nachname = "Gabriel";
             kunde2.Vorname = "Dominic";
-            kunde2.Geburtsdatum = DateTime.Parse("01/05/1994");
+            kunde2.Geburtsdatum = new DateTime(1994, 05, 01);
 
             // act
             await _target.Update(kunde1);
@@ -60,7 +60,7 @@ namespace AutoReservation.BusinessLayer.Testing
             Assert.Equal(1, kunde1.Id);
             Assert.Equal("Tanner", kunde1.Nachname);
             Assert.Equal("Julia", kunde1.Vorname);
-            Assert.Equal(DateTime.Parse("04/10/1996"), kunde1.Geburtsdatum);
+            Assert.Equal(new DateTime(1996, 10, 04), kunde1.Geburtsdatum);
         }
     }
 }

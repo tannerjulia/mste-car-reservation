@@ -43,8 +43,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("04/10/2020 12:00:00"),
-                Bis = DateTime.Parse("05/10/2020 12:00:00")
+                Von = new DateTime(2020, 10, 04, 12, 00, 00),
+                Bis = new DateTime(2020, 10, 05, 12, 00, 00)
             };
 
             // act
@@ -78,8 +78,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("04/10/2020 12:00:00"), 
-                Bis = DateTime.Parse("04/10/2020 11:59:59")
+                Von = new DateTime(2020, 10, 04, 12, 00, 00),
+                Bis = new DateTime(2020, 10, 04, 11, 59, 59)
             };
 
             // act - assert
@@ -94,8 +94,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("05/10/2020"), 
-                Bis = DateTime.Parse("04/10/2020")
+                Von = new DateTime(2020, 10, 05),
+                Bis = new DateTime(2020, 10, 04)
             };
 
             // act - assert

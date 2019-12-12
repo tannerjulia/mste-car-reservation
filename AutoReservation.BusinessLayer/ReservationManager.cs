@@ -25,11 +25,13 @@ namespace AutoReservation.BusinessLayer
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
-                return await context.Reservationen
-                    .Where(r => r.ReservationsNr == id)
-                    .Include(r => r.Auto) //Eager Loading
-                    .Include(r => r.Kunde) //Eager Loading
-                    .FirstAsync();
+                Reservation reservation = await context.Reservationen.FindAsync(id);
+                if (reservation != null)
+                {
+                    context.Entry(reservation).Reference(r => r.Auto).Load();
+                    context.Entry(reservation).Reference(r => r.Kunde).Load();
+                }
+                return reservation;
             }
         }
 

@@ -27,8 +27,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("2020-01-20 00:00:00"), 
-                Bis = DateTime.Parse("2020-01-21 00:00:00")
+                Von = new DateTime(2020,01, 20),
+                Bis = new DateTime(2020, 01,21)
             };
             
             // act
@@ -48,8 +48,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("2020-01-21 00:00:00"), 
-                Bis = DateTime.Parse("2020-01-22 00:00:00")
+                Von = new DateTime(2020, 01, 21),
+                Bis = new DateTime(2020, 01, 22)
             };
             
             // act
@@ -69,8 +69,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("2020-01-09 00:00:00"), 
-                Bis = DateTime.Parse("2020-01-10 00:00:00")
+                Von = new DateTime(2020, 01, 09),
+                Bis = new DateTime(2020, 01, 10)
             };
             
             // act
@@ -90,8 +90,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("2020-01-08 00:00:00"), 
-                Bis = DateTime.Parse("2020-01-09 00:00:00")
+                Von = new DateTime(2020, 01, 08, 00, 00,00),
+                Bis = new DateTime(2020, 01, 09, 00,00,00)
             };
             
             // act
@@ -111,8 +111,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("2020-01-15 00:00:00"), 
-                Bis = DateTime.Parse("2020-01-25 00:00:00")
+                Von = new DateTime(2020, 01, 15, 00, 00, 00),
+                Bis = new DateTime(2020, 01, 25, 00, 00, 00)
             };
             
             // act - assert
@@ -129,8 +129,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("2020-01-05 00:00:00"), 
-                Bis = DateTime.Parse("2020-01-15 00:00:00")
+                Von = new DateTime(2020, 01, 05, 00, 00, 00),
+                Bis = new DateTime(2020, 01, 15, 00,00,00)
             };
             
             // act - assert
@@ -147,8 +147,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("2020-01-10 00:00:00"), 
-                Bis = DateTime.Parse("2020-01-25 00:00:00")
+                Von = new DateTime(2020, 01, 10),
+                Bis = new DateTime(2020, 01, 25)
             };
             
             // act - assert
@@ -165,8 +165,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("2020-01-10 00:00:00"), 
-                Bis = DateTime.Parse("2020-01-15 00:00:00")
+                Von = new DateTime(2020, 01, 10),
+                Bis = new DateTime(2020, 01, 15)
             };
             
             // act - assert
@@ -183,8 +183,8 @@ namespace AutoReservation.BusinessLayer.Testing
             {
                 KundeId = 1,
                 AutoId = 1,
-                Von = DateTime.Parse("2020-01-10 00:00:00"), 
-                Bis = DateTime.Parse("2020-01-20 00:00:00")
+                Von = new DateTime(2020, 01, 10),
+                Bis = new DateTime(2020, 01, 20)
             };
             
             // act - assert
