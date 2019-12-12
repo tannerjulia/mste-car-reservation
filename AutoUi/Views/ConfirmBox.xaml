@@ -1,0 +1,45 @@
+﻿<Window x:Class="AutoUi.Views.ConfirmBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:AutoUi.ViewModels"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        d:DataContext="{d:DesignInstance viewModels:ConfirmBoxVm, IsDesignTimeCreatable=true}"
+        Title="{Binding WindowTitle}" Height="200" Width="400">
+    <Window.Resources>
+        <ResourceDictionary Source="../Styles/ConfirmBoxStyles.xaml" />
+    </Window.Resources>
+    
+    <!-- Layout Code -->
+    <DockPanel>
+         <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource ConfirmBoxFooterStyle}">
+             <DockPanel Margin="10" LastChildFill="False">
+                 <!-- Help-Button brauchen wir im Moment nicht (Unsichtbar) -->
+                 <Button DockPanel.Dock="Left"
+                         Visibility="Hidden"
+                         Style="{StaticResource MyHelpButtonStyle}"
+                         Content="Hilfe" />
+                 <Button DockPanel.Dock="Right" 
+                         Click="Cancel_Click" 
+                         Content="{Binding CancelButtonCaption}" />
+                 <Button DockPanel.Dock="Right" Style="{StaticResource PrimaryButtonStyle}" 
+                         Click="Ok_Click"  
+                         Content="{Binding OkButtonCaption}" />
+            </DockPanel>
+         </StackPanel>
+
+        <DockPanel>
+
+            <Grid DockPanel.Dock="Left">
+                <StaticResource ResourceKey="WarningIcon" />
+            </Grid>
+
+            <StackPanel Style="{StaticResource ConfirmBoxMessagePanelStyle}" >
+                <TextBlock Style="{StaticResource ConfirmBoxTitleStyle}" Text="{Binding Title}" />
+                <TextBlock Style="{StaticResource ConfirmBoxMessageStyle}" Text="{Binding Message}" />
+            </StackPanel>
+        </DockPanel>
+    </DockPanel>
+</Window>

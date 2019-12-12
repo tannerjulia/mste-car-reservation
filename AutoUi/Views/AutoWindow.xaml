@@ -1,0 +1,55 @@
+﻿<Window x:Class="AutoUi.Views.AutoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoUi"
+        xmlns:vm="clr-namespace:AutoUi.Core.ViewModels;assembly=AutoUi.Core"
+        d:DataContext="{d:DesignInstance vm:AutoVm}"
+        Style="{StaticResource GenericWindowStyle}"
+        mc:Ignorable="d"
+        Title="AutoWindow" Height="400" Width="640">
+    <DockPanel>
+        
+        <Grid DockPanel.Dock="Top" Style="{StaticResource TitleContainerStyle}"> 
+            <Label Style="{StaticResource TitleStyle}">Stammdaten Auto</Label>
+        </Grid>
+        <DockPanel DockPanel.Dock="Bottom" Style="{StaticResource FooterContainerStyle}">
+            <Button DockPanel.Dock="Right" Content="OK" Style="{StaticResource PrimaryButtonStyle}" Click="OkButton_Click" />
+            <Button DockPanel.Dock="Right" Content="Abbrechen" Style="{StaticResource SecondaryButtonStyle}" Click="CancelButton_Click" />
+            <!-- Spacer Element: sorgt dafür, dass das "Zentrum" im DockPanel gefüllt wird  -->
+            <TextBlock />
+        </DockPanel>
+        <!-- 
+            Höhe des Grids soll sich auf Basis des Inhalts selbst ergeben
+            also keine Grössenangaben im Grid (Steuerung über Schriftgrösse, sowie
+            Padding und Margin der Labels und TextBoxen) 
+        -->
+        <Grid Margin="{StaticResource DefaultSpacing}" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+        
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">Bitte geben Sie den die Stammdaten des Fahrzeugs ein:</Label>
+
+            <Label Grid.Row="1" Grid.Column="0">Marke/Modell:</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Marke}" />
+            <CheckBox Grid.Row="2" Grid.Column="1" Margin="5" IsChecked="{Binding IstNeu}" />
+
+            <Label Grid.Row="3" Grid.Column="0">Tagestarif (CHF):</Label>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding Tagestarif}" />
+
+            <Label Grid.Row="4" Grid.Column="0">Autoklasse:</Label>
+            <ComboBox Grid.Row="4" Grid.Column="1" Margin="5" ItemsSource="{Binding Autoklassen}" SelectedItem="{Binding AutoKlasse}" />
+        </Grid>
+    </DockPanel>
+
+</Window>

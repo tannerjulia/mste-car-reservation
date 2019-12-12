@@ -1,0 +1,97 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ModernDialogs.Styles">
+
+    <!-- benannten Style als Basis benutzen -->
+    <Style x:Key="DefaultButtonStyle" TargetType="Button">
+        <Setter Property="BorderThickness" Value="4" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Background" Value="#aaa" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="Padding" Value="10 5 10 5" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <!-- 
+                        ControlTemplate der Buttons überschreiben, damit wir die
+                        nervigen Default-Mouse-Over-Effekte etc. los werden
+                    -->
+                <ControlTemplate TargetType="Button">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Background="{TemplateBinding Background}" >
+                            <ContentPresenter Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <!-- 
+                            Wir hätten die Triggers auch hier auf Ebene ControlTemplate definieren können:
+                            (so wird das beispielsweise in den Windows-Theme-Defaults von WPF gemacht)
+                        -->
+                    <!--
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#80bbbbbb" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        -->
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!-- 
+            Hier definieren wir die Triggers auf Ebene Style
+            (das ist aber nur möglich, weil wir oben das ControlTemplate
+            selbst definieren. Ansonsten würden uns die im Windows-Theme    
+            hinterlegten ControlTemplate-Triggers hier ins Handwerk pfuschen,
+            da diese höhere Priorität haben als die Style-Triggers)
+        -->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="#80bbbbbb" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!-- Den obigen benannten Style erben und auf alle Buttons anwenden -->
+    <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}" />
+
+    <!-- Einen primären Style definieren, welcher eine Akzentfarbe verwendet -->
+    <Style x:Key="PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Background" Value="#0066a6" />
+    </Style>
+
+    <!-- für den Help Button einen zusätzlichen abgeleiteten und benannten Style definieren -->
+    <Style x:Key="MyHelpButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+        <Setter Property="Foreground" Value="Gray" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="ConfirmBoxMessagePanelStyle">
+        <Setter Property="Panel.Margin" Value="10 0" />
+    </Style>
+
+    <Style x:Key="ConfirmBoxFooterStyle">
+        <Setter Property="Panel.Background" Value="#eee" />
+    </Style>
+
+    <Style x:Key="ConfirmBoxTitleStyle" TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="0 10 0 10" />
+    </Style>
+
+    <Style x:Key="ConfirmBoxMessageStyle" TargetType="TextBlock">
+        <!-- Sicherstellen, dass längerer Text zeilenweise umbricht: TextWrapping einschalten! -->
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!-- ganzes (Sub-)Layout für manuell gezeichnetes Warn-Icon -->
+    <Grid x:Key="WarningIcon" Width="64" Height="64" 
+          VerticalAlignment="Top" Margin="0 10">
+        <Polygon Points="8,52 56,52 32,8" Fill="#bbb" />
+        <!--<Polygon Points="16,48 48,48 32,18" Fill="White" />-->
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Foreground="White" FontSize="24">!</TextBlock>
+    </Grid>
+
+</ResourceDictionary>
